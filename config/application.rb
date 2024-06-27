@@ -23,5 +23,7 @@ module Musicserver
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.hosts << "swift-mirrors-cry.loca.lt"
+    config.hosts << "swift-mirrors-cry.loca.lt"
   end
 end

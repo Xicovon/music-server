@@ -52,3 +52,25 @@ plugin :tmp_restart
 
 # Only use a pidfile when requested
 pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
+
+if ENV['RACK_ENV'] == 'development'
+  localhost_key = "#{File.join('/etc/ssl/certs', 'music_server_key.pem')}"
+  localhost_crt = "#{File.join('/etc/ssl/certs', 'music_server_cert.pem')}"
+  # To be able to use rake etc
+  ssl_bind '0.0.0.0', 3000, {
+      key: localhost_key,
+      cert: localhost_crt,
+      verify_mode: 'none'
+  }
+end
+
+if ENV['RACK_ENV'] == 'production'
+  localhost_key = "#{File.join('/etc/ssl/certs', 'music_server_key.pem')}"
+  localhost_crt = "#{File.join('/etc/ssl/certs', 'music_server_cert.pem')}"
+  # To be able to use rake etc
+  ssl_bind '0.0.0.0', 3000, {
+      key: localhost_key,
+      cert: localhost_crt,
+      verify_mode: 'none'
+  }
+end
