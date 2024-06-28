@@ -98,11 +98,18 @@ GEM
       reline (>= 0.3.8)
     declarative (0.0.20)
     drb (2.2.1)
+    dry-configurable (1.1.0)
+      dry-core (~> 1.0, < 2)
+      zeitwerk (~> 2.6)
+    dry-core (1.0.1)
+      concurrent-ruby (~> 1.0)
+      zeitwerk (~> 2.6)
     erubi (1.13.0)
     faraday (2.9.2)
       faraday-net_http (>= 2.0, < 3.2)
     faraday-net_http (3.1.0)
       net-http
+    filesize (0.2.0)
     gems (1.2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -338,6 +345,9 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    ytdl (0.4.0)
+      dry-configurable (~> 1.0)
+      filesize (~> 0.2.0)
     zeitwerk (2.6.16)
 
 PLATFORMS
@@ -368,6 +378,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
+  ytdl
 
 BUNDLED WITH
    2.5.14

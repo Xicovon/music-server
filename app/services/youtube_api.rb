@@ -36,7 +36,7 @@ class YoutubeApi
 
     credentials = @@authorizer.get_credentials(USER_ID)
     credentials.redirect_uri = REDIRECT_URI
-    
+
     if credentials.nil?
       @@url = @@authorizer.get_authorization_url(base_url: REDIRECT_URI)
     else
@@ -67,6 +67,25 @@ class YoutubeApi
         max_results: 50,
         page_token: next_page_token,
         options: { authorization: get_credentials }
+    ).to_json
+
+    return JSON.parse(response)
+  end
+
+  def self.list_video_by_id(video_id)
+    response = @@service.list_videos(
+      'snippet',
+      id: video_id,
+      options: { authorization: get_credentials }
+    ).to_json
+
+    return JSON.parse(response)
+  end
+
+  def self.delete_playlist_item(item_id)
+    response = @@service.delete_playlist_item(
+      item_id,
+      options: { authorization: get_credentials }
     ).to_json
 
     return JSON.parse(response)
