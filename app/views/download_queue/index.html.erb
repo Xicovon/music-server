@@ -1,0 +1,16 @@
+<h1>DownloadQueue#index</h1>
+
+<table>
+  <tr>
+    <th>Item ID</th>
+    <th>Video ID</th>
+    <th>Thumbnail Url</th>
+  </tr>
+  <% pending_downloads.each do |download| %>
+    <tr>
+      <td><%= download.playlist_item_id %></td>
+      <td><%= download.video_id %></td>
+      <td><a href= <%= download.thumbnail_url %>>Link</a></td>
+    </tr>
+  <% end %>
+</table>

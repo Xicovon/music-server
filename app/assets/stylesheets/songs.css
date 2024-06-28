@@ -1,0 +1,9 @@
+table, th, td {
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #2f6c8d;
+    color: #f1f1f1;
+}

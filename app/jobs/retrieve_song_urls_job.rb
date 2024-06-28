@@ -1,5 +1,0 @@
-class RetrieveSongUrlsJob < ApplicationJob
-
-  
-
-end

@@ -35,7 +35,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_27_185702) do
 
   create_table "song_download_queues", force: :cascade do |t|
     t.string "playlist_item_id"
-    t.string "url"
+    t.string "video_id"
+    t.string "thumbnail_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["playlist_item_id"], name: "index_song_download_queues_on_playlist_item_id", unique: true

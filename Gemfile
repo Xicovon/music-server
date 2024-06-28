@@ -57,3 +57,6 @@ group :test do
 end
 
 gem 'google-api-client', '>0.7'
+gem 'googleauth'
+
+gem "sidekiq", "~> 7.2"
