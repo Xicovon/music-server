@@ -91,3 +91,5 @@ class YoutubeApi
     return JSON.parse(response)
   end
 end
+
+YoutubeApi.init

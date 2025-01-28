@@ -1,7 +1,7 @@
 class DownloadSongJob
   include Sidekiq::Job
 
-  OUTPUT_DIRECTORY = "/media/bowen/4bda08cd-11f8-4fdf-a496-2e21e1d3c1b5/musicserver_data"
+  OUTPUT_DIRECTORY = "/media/bowen/musicserver_data"
 
   def perform(*guests)
     songs_to_download = SongDownloadQueue.all
@@ -17,6 +17,7 @@ class DownloadSongJob
 
       channel_title = response.dig("items").first.dig("snippet", "channelTitle")
       title = response.dig("items").first.dig("snippet", "title")
+      video_id = response.dig("items").first.dig("id")
 
       output_path = "#{OUTPUT_DIRECTORY}/#{song.video_id}"
 
@@ -28,7 +29,7 @@ class DownloadSongJob
       File.delete(state.info_json)
 
       if File.file?("#{output_path}.opus")
-        s = Song.new(original_title: title, title: title, path: "#{output_path}.opus", uploader: channel_title)
+        s = Song.new(video_id: video_id, original_title: title, title: title, path: "#{output_path}.opus", uploader: channel_title)
         s.save
 
         song.destroy

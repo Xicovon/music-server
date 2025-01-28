@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "welcome#index"
+  get "youtube_api/show"
   get "job/index"
   get "job/start_retrieve_song_urls_job", to: 'job#startRetrieveSongUrlsJob'
   get "download_queue/index"
