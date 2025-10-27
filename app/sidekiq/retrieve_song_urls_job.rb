@@ -5,7 +5,6 @@ class RetrieveSongUrlsJob
 
   def perform(*guests)
     service = YoutubeApi.get_service
-
     next_page_token = nil
 
     loop do
@@ -19,6 +18,12 @@ class RetrieveSongUrlsJob
       items.each do |i|
         item_id = i.fetch("id")
         thumbnail_url = i.dig("snippet", "thumbnails", "maxres", "url")
+        if thumbnail_url.nil?
+          thumbnail_url = i.dig("snippet", "thumbnails", "standard", "url")
+        end
+        if thumbnail_url.nil?
+          thumbnail_url = i.dig("snippet", "thumbnails", "default", "url")
+        end
         video_id = i.dig("contentDetails", "videoId")
         SongDownloadQueue.find_or_create_by!(playlist_item_id: item_id, video_id: video_id, thumbnail_url: thumbnail_url)
       end

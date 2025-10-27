@@ -21,35 +21,33 @@ class DownloadSongJob
       video_id = response.dig("items").first.dig("id")
       output_path = "#{OUTPUT_DIRECTORY}/#{video_id}"
 
-      # Skip if the file has already been downloaded
-      if File.file?("#{output_path}.opus")
-        YoutubeApi.delete_playlist_item(song.playlist_item_id)
-        song.destroy
-        next
-      end
-
-      state = YoutubeDL.download("https://www.youtube.com/watch?v=#{song.video_id}", extract_audio: true, output: output_path).call
-      if state.error?
-        File.delete(state.info_json)
-        next
-      end
-
-      File.delete(state.info_json)
-
-      if File.file?("#{output_path}.opus")
-        s = Song.new(video_id: video_id, original_title: title, title: title, path: "#{output_path}.opus", uploader: channel_title)
-        s.save
-
-        download_thumbnail(song.thumbnail_url, "#{output_path}.jpg")
-
-        YoutubeApi.delete_playlist_item(song.playlist_item_id)
-        song.destroy
-      end
+      download_thumbnail(song.thumbnail_url, "#{output_path}.jpg")
+      download_song(output_path, video_id, title, channel_title)
+      YoutubeApi.delete_playlist_item(song.playlist_item_id)
+      song.destroy
     end
   end
 
-  def download_thumbnail(url, output)
+  def download_song(output_path, video_id, title, channel_title)
+    return if File.file?("#{output_path}.opus")
+
+    state = YoutubeDL.download("https://www.youtube.com/watch?v=#{video_id}", extract_audio: true, output: output_path).call
+    if state.error?
+      File.delete(state.info_json)
+      return
+    end
+
+    File.delete(state.info_json)
+
+    if File.file?("#{output_path}.opus")
+      s = Song.new(video_id: video_id, original_title: title, title: title, path: "#{output_path}.opus", uploader: channel_title)
+      s.save
+    end
+  end
+
+  def download_thumbnail(url, output_path)
+    return if File.file?("#{output_path}.jpg")
     download = URI.open(url)
-    IO.copy_stream(download, output)
+    IO.copy_stream(download, output_path)
   end
 end
