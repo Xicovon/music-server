@@ -8,7 +8,6 @@ Bundler.require(*Rails.groups)
 
 module Musicserver
   class Application < Rails::Application
-    config.logger = Logger.new(STDOUT)
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
 
@@ -24,6 +23,11 @@ module Musicserver
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.hosts << "bright-olives-march.loca.lt"
+    config.hosts << "xicovon.xyz"
+
+    # create a logger with a file as a logging target
+    config.logger = Logger.new('log/important.log')
+    # set the minimum log level
+    config.log_level = :warn
   end
 end

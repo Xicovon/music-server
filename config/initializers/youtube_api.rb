@@ -37,15 +37,16 @@ class YoutubeApi
     credentials = @@authorizer.get_credentials(USER_ID)
     credentials.redirect_uri = REDIRECT_URI
 
-    if credentials.nil?
-      @@url = @@authorizer.get_authorization_url(base_url: REDIRECT_URI)
-    else
-      @@service.authorization = credentials
-    end
+    @@url = @@authorizer.get_authorization_url(base_url: REDIRECT_URI)
+    @@service.authorization = credentials
   end
 
   def self.get_service
     return @@service
+  end
+
+  def self.get_authorizer
+    return @@authorizer
   end
 
   def self.get_url

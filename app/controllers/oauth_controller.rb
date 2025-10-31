@@ -1,7 +1,6 @@
 class OauthController < ApplicationController
 
   def authorize
-    YoutubeApi.init
     @auth_url = YoutubeApi.get_url
     @credentials = YoutubeApi.get_credentials
   end

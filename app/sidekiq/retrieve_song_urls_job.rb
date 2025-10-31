@@ -4,7 +4,6 @@ class RetrieveSongUrlsJob
   PLAYLIST_ID = "PLDhY58bJKzLDfJxzHlHlbgfhAAnB-jXN2"
 
   def perform(*guests)
-    service = YoutubeApi.get_service
     next_page_token = nil
 
     loop do
@@ -33,7 +32,8 @@ class RetrieveSongUrlsJob
 
     # queue job to download files
 
-    #DownloadSongJob.perform
+    download_job = DownloadSongJob.new
+    download_job.perform
     RetrieveSongUrlsJob.perform_at(30.minutes.from_now)
   end
 end
