@@ -9,7 +9,7 @@ class YoutubeApi
   require 'json'
 
   USER_ID = 'default'
-  REDIRECT_URI = 'https://bright-olives-march.loca.lt'
+  REDIRECT_URI = 'https://xicovon.xyz'
   APPLICATION_NAME = 'Xicovon\'s Music Downloader'
 
 # REPLACE WITH NAME/LOCATION OF YOUR client_secrets.json FILE
