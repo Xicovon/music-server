@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "welcome#index"
+  root 'sessions#home'
   get "youtube_api/show"
   get "job/index"
   get "job/start_retrieve_song_urls_job", to: 'job#startRetrieveSongUrlsJob'
@@ -24,4 +24,11 @@ Rails.application.routes.draw do
   # oauth2
   get '/oauth2callback', to: 'oauth#oauth_callback'
   get '/authorize', to: 'oauth#authorize'
+
+  resources :users, only: [:new, :create, :edit, :update, :show, :destroy]
+  
+  get '/login', to: 'sessions#login'
+  post '/login', to: 'sessions#create'
+  post '/logout', to: 'sessions#destroy'
+  get '/logout', to: 'sessions#destroy'
 end

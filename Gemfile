@@ -62,3 +62,4 @@ gem 'googleauth'
 gem "sidekiq", "~> 7.2"
 
 gem 'ytdl'
+gem 'bcrypt'
