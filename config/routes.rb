@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "song/show"
   get "song/edit"
   get "song/delete"
+  get "song/stream"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -31,4 +32,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   post '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
+
+  get '/media/audio', to: 'media#audio'
+  get '/media/image', to: 'media#image'
 end

@@ -40,7 +40,7 @@ class DownloadSongJob
     File.delete(state.info_json)
 
     if File.file?("#{output_path}.opus")
-      s = Song.new(video_id: video_id, original_title: title, title: title, path: "#{output_path}.opus", uploader: channel_title)
+      s = Song.new(video_id: video_id, original_title: title, title: title, path: "#{output_path}.opus", uploader: channel_title, filetype: "opus")
       s.save
     end
   end

@@ -1,13 +1,18 @@
 <h1>Song#index</h1>
 <p>Find me in app/views/song/index.html.erb</p>
 
+<audio controls>
+  <source src="/media/audio?id=_8HYc-sF99I" type="audio/ogg">
+  Your browser does not support the audio tag.
+</audio>
+
 <table>
   <tr>
     <th>Title</th>
   </tr>
   <% songs.each do |song| %>
     <tr>
-      <tr>song.title</tr>
+      <td><%= song.title %></td>
     </tr>
   <% end %>
 </table>

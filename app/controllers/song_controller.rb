@@ -7,6 +7,10 @@ class SongController < ApplicationController
     end
   end
 
+  def stream
+    @songs = Song.select(:id, :title, :video_id).to_json
+  end
+
   def show
   end
 
